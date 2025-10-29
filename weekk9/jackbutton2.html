@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jack's Button</title>
+  <title>Jack's Loop</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
       margin-top: 50px;
+      background-color: #fafafa;
     }
     button {
       padding: 10px 20px;
@@ -19,11 +20,12 @@
       margin-top: 20px;
       font-size: 18px;
       color: #333;
+      white-space: pre-line; /* preserves line breaks */
     }
   </style>
 </head>
 <body>
-  <button id="jackButton">Press Me</button>
+  <button id="jackButton">Sit down and start writing</button>
   <div id="output"></div>
 
   <script>
@@ -31,7 +33,11 @@
     const output = document.getElementById('output');
 
     button.addEventListener('click', () => {
-      output.textContent = "All work and no play makes Jack a dull boy";
+      let text = '';
+      for (let i = 0; i < 50; i++) {
+        text += "All work and no play makes Jack a dull boy\n";
+      }
+      output.textContent = text;
     });
   </script>
 </body>
