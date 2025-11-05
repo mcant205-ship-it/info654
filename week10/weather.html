@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button</title>
+</head>
+<html>
+  <script>
+    async function onClickSubmit(){
+      var location = document.getElementById("location").value;
+      var url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=74d54fd12f4329d090b28c4f4a540a56`
+      var response = await fetch(url);
+      var jsonData = await response.json();
+      document.getElementById("temp_min").innerText = jsonData["main"]["temp_min"];
+      document.getElementById("temp_max").innerText = jsonData.main.temp_max; // this is an alternative way to access data
+      document.getElementById("feels_like").innerText = jsonData.main.feels_like;
+    }
+  </script>
+<body>
+
+<h1>Enter a location below to be informed on what the current weather is like</h1>
+<h2>Example: New York</h2>
+<input type="text" id="location" name="location" required size="20">
+<button type="button" id="submit" onclick="onClickSubmit()">submit</button>
+
+<div>
+  Min Temp <span id="temp_min"></span> <br>
+  Max Temp <span id="temp_max"></span> <br>
+  Feel Temp <span id="feels_like"></span> <br>
+</div>
+<br><br>
+<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2lmOTNxZnZqeHFwbWJzODltbXNkc3o4OG9qbGx3cmxydWNtcHpzaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZW0gDWppPPrNox4kkF/giphy.gif" alt="Animated GIF">
+<p>source: https://giphy.com/pudgypenguins</p>
+
+</body>
+</html>
