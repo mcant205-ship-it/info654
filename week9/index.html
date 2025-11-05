@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Halloween!</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: 'Courier New', monospace;
+      margin-top: 50px;
+      background-color: #f5f5f5;
+      transition: background 1s ease;
+    }
+    #output {
+      margin-top: 30px;
+      text-align: left;
+      display: inline-block;
+      font-size: 1.1em;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    
+    #finalGif {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    #finalGif img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>I am a writer, so I must write. My belly is full of whiskey, which inspires me to write these words.</h1>
+  <button onclick="startTyping()">Write the Lines</button>
+
+  <div id="output"></div>
+
+  <div id="finalGif">
+    <img src="https://giffiles.alphacoders.com/114/114395.gif" alt="Scary Jack GIF">
+  </div>
+
+  <script>
+    function startTyping() {
+      const outputDiv = document.getElementById('output');
+      const finalGif = document.getElementById('finalGif');
+      outputDiv.innerHTML = ''; 
+      let count = 0;
+      const totalLines = 50;
+      const lineText = "All work and no play makes Jack a dull boy";
+
+      const interval = setInterval(() => {
+        count++;
+        outputDiv.innerHTML += `${lineText}<br>`;
+        if (count >= totalLines) {
+          clearInterval(interval);
+          setTimeout(() => {
+            document.body.style.backgroundColor = "black";
+            document.body.innerHTML = ''; 
+            finalGif.style.display = 'flex'; 
+            document.body.appendChild(finalGif);
+          }, 500);
+        }
+      }, 100); 
+    }
+  </script>
+
+</body>
+</html>
