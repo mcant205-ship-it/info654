@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Animal Generator Demo — Marie Cantor</title>
+</head>
+
+<body>
+  <h2>One dog picture a day will save the day</h2>
+  <button id="fetchDog" onclick="fetchDogImage()">Generate Dog!</button>
+  <div id="dogImage"></div>
+
+  <h2>Be as sly as a fox</h2>
+  <button id="fetchFox" onclick="fetchFoxImage()">Generate Fox!</button>
+  <div id="foxImage"></div>
+
+  <script>
+    async function fetchDogImage() {
+      try {
+        const response = await fetch('https://random.dog/woof.json');
+        const data = await response.json();
+        const imageUrl = data.url;
+        // Only show image files (skip videos)
+        if (imageUrl.endsWith('.mp4') || imageUrl.endsWith('.webm')) {
+          fetchDogImage(); // try again
+          return;
+        }
+        document.getElementById('dogImage').innerHTML = `<img src="${imageUrl}" alt="Random Dog" style="max-width: 400px; height: auto;">`;
+      } catch (error) {
+        console.error('Error fetching dog image:', error);
+      }
+    }
+
+    async function fetchFoxImage() {
+      try {
+        const response = await fetch('https://randomfox.ca/floof/');
+        const data = await response.json();
+        const imageUrl = data.image || data.url;
+        document.getElementById('foxImage').innerHTML = `<img src="${imageUrl}" alt="Random Fox" style="max-width: 400px; height: auto;">`;
+      } catch (error) {
+        console.error('Error fetching fox image:', error);
+      }
+    }
+  </script>
+  
+</body>
+</html>
